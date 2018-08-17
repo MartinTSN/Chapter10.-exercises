@@ -2,7 +2,7 @@
 
 public class Hemisphere
 {
-    decimal radius;
+    decimal radius = 1;
 
     public Hemisphere(decimal radius = 1)
     {
@@ -13,8 +13,7 @@ public class Hemisphere
     {
         get
         {
-            return Decimal.Multiply(Decimal.Multiply(2 / 3, (decimal)Math.PI), Radius);
-            //Decimal.Divide(Decimal.Multiply(Decimal.Multiply(2 / 3, (decimal)Math.PI), Decimal.Multiply(Radius, 3)), 2);
+            return Decimal.Multiply(Decimal.Multiply(2 / (decimal)3, (decimal)Math.PI), Radius);
         }
     }
     public decimal CurvedSurfaceArea
@@ -40,7 +39,7 @@ public class Hemisphere
         }
         set
         {
-            if (value > 0.0m || value < 12.0m)
+            if (value > 0.0m && value < 12.0m)
             {
                 radius = value;
             }
