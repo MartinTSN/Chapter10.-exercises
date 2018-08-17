@@ -45,9 +45,9 @@ public class Time2
         }
         set
         {
-            if (value < 0 || value > 59)
+            if (value < 0 )
             {
-                throw new ArgumentOutOfRangeException(nameof(value), value, $"{nameof(Minute)} must be 0-59");
+                throw new ArgumentOutOfRangeException(nameof(value), value, $"{nameof(Minute)} must be above 0");
             }
             minute = value;
         }
@@ -61,17 +61,41 @@ public class Time2
         }
         set
         {
-            if (value < 0 || value > 59)
+            if (value < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), value, $"{nameof(Second)} must be 0-59");
+                throw new ArgumentOutOfRangeException(nameof(value), value, $"{nameof(Second)} must be above 0");
             }
             second = value;
         }
     }
 
-    public string ToUniversalString() => $"{Hour:D2}:{Minute:D2}:{Second:D2}";
+    public int ToSeconds(int hour, int minute, int second)
+    {
+        minute = hour * 60 + minute;
+        Second = minute * 60 + second;
+        return Second;
+    }
 
-    public override string ToString() => $"{((Hour == 0 || Hour == 12) ? 12 : Hour % 12)}:" +
-        $"{Minute:D2}:{Second:D2} {(Hour < 12 ? "AM" : "PM")}";
+    public Time2 ToHoursMinutesSeconds(int second)
+    {
+        Hour = second / 60 / 60;
+        second = second - (Hour * 60 * 60);
 
+        Minute = second / 60;
+        second = second - (Minute * 60);
+
+        Second = second;
+        Time2 time2 = new Time2(Hour, Minute, Second);
+        return time2;
+    }
+    public string ToUniversalString()
+    {
+        return $"{Hour:D2}:{Minute:D2}:{Second:D2}";
+    }
+
+    public override string ToString()
+    {
+        return $"{((Hour == 0 || Hour == 12) ? 12 : Hour % 12)}:" +
+                $"{Minute:D2}:{Second:D2} {(Hour < 12 ? "AM" : "PM")}";
+    }
 }
