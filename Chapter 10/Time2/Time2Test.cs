@@ -31,6 +31,17 @@ class Time2Test
         Console.WriteLine($"{t5.ToUniversalString()}");
         Console.WriteLine($"{t5.ToString()}");
 
+
+        try
+        {
+            var t6 = new Time2(27, 74, 99);
+        }
+        catch (ArgumentOutOfRangeException ex)
+        {
+
+            Console.WriteLine("\nException while initializing t6:");
+            Console.WriteLine(ex.Message);
+        }
         Console.ReadLine();
     }
 }
