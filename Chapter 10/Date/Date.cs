@@ -1,6 +1,6 @@
 ﻿using System;
 
-class Date
+public class Date
 {
     private int month;
     private int day;
