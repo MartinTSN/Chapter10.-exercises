@@ -47,7 +47,7 @@ public class Date
             {
                 throw new ArgumentOutOfRangeException(nameof(value), value, $"{nameof(Day)} out of range for current month/year");
             }
-            Day = value;
+            day = value;
         }
     }
 

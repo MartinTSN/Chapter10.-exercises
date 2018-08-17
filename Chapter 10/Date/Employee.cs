@@ -13,6 +13,6 @@
         HireDate = hireDate;
     }
 
-    public override string ToString() => $"{LastName},{FirstName}" +
+    public override string ToString() => $"{LastName}, {FirstName} " +
         $"Hired: {HireDate} Birthday: {BirthDate}";
 }
