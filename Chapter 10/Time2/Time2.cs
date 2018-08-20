@@ -9,16 +9,20 @@ public class Time2
     public Time2(int hour = 0, int minute = 0, int second = 0)
     {
         SetTime(hour, minute, second);
+        ToSeconds(Hour, Minute, Second);
     }
 
     public Time2(Time2 time)
-        : this(time.hour, time.minute, time.second) { }
+        : this(time.hour, time.minute, time.second)
+    {
+    }
 
     public void SetTime(int hour, int minute, int second)
     {
         Hour = hour;
         Minute = minute;
         Second = second;
+
     }
 
     public int Hour
@@ -45,7 +49,7 @@ public class Time2
         }
         set
         {
-            if (value < 0 )
+            if (value < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(value), value, $"{nameof(Minute)} must be above 0");
             }
@@ -61,9 +65,9 @@ public class Time2
         }
         set
         {
-            if (value < 0)
+            if (value < 0 || value > 86399)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), value, $"{nameof(Second)} must be above 0");
+                throw new ArgumentOutOfRangeException(nameof(value), value, $"{nameof(Second)} must be above 0 - 86399");
             }
             second = value;
         }
@@ -73,6 +77,8 @@ public class Time2
     {
         minute = hour * 60 + minute;
         Second = minute * 60 + second;
+        Hour = 0;
+        Minute = 0;
         return Second;
     }
 
@@ -90,6 +96,7 @@ public class Time2
     }
     public string ToUniversalString()
     {
+        ToHoursMinutesSeconds(Second);
         return $"{Hour:D2}:{Minute:D2}:{Second:D2}";
     }
 
