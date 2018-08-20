@@ -6,6 +6,7 @@
     public DepreciatingValue(decimal valueOfAsset = 0, decimal annualDepreciationRate = 10)
     {
         ValueOfAsset = valueOfAsset;
+        AnnualDepreciationRate = annualDepreciationRate;
     }
 
 
@@ -33,8 +34,9 @@
         }
     }
 
-    public decimal CalculateAnnualDepreciation()
+    public decimal CalculateAnnualDepreciation(decimal valueOfAsset)
     {
-        return ValueOfAsset * AnnualDepreciationRate;
+        ValueOfAsset = valueOfAsset / AnnualDepreciationRate;
+        return ValueOfAsset;
     }
 }
