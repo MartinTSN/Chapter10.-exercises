@@ -4,7 +4,7 @@ public class Date
 {
     private int month;
     private int day;
-    public int Year { get; private set; }
+    public int year;
 
     public Date(int month, int day, int year)
     {
@@ -51,6 +51,50 @@ public class Date
         }
     }
 
+    public int Year
+    {
+        get
+        {
+            return year;
+        }
+        set
+        {
+            if (value < 1918 || value > DateTime.Now.Year)
+            {
+                throw new ArgumentOutOfRangeException(nameof(value), value, $"{nameof(Year)} out of range for current year");
+            }
+            year = value;
+        }
+    }
+
     public override string ToString() => $"{Month}/{Day}/{Year}";
+
+    public string NextDay()
+    {
+        int[] daysPerMonth = { 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+        int monthsPerYear = 12;
+
+
+        if (day >= daysPerMonth[Month] || Month == 2 && day == 28)
+        {
+
+            if (Month != monthsPerYear)
+            {
+                Month += 1;
+            }
+            if (Month == monthsPerYear && Day == daysPerMonth[Month])
+            {
+                Year += 1;
+                Month = 1;
+            }
+            Day = 1;
+        }
+        else
+        {
+            Day += 1;
+        }
+
+        return $"{Day},{Month},{Year}";
+    }
 
 }
